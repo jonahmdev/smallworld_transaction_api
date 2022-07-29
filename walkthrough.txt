@@ -1,0 +1,19 @@
+# check all balances
+curl localhost:5000/balances
+
+# transactions giving 150 points to a0302239 wallet
+curl -X POST -G localhost:5000/transaction/a0302239-42a1-4047-94c2-723e4c8707ba/5f08c643-3886-4f63-94df-ec0ed092d0e2 --data-urlencode 'amt=50'
+curl -X POST -G localhost:5000/transaction/a0302239-42a1-4047-94c2-723e4c8707ba/62cb687e-8485-41ae-a719-d34f928195ba --data-urlencode 'amt=100'
+
+# check out the pending_transactions and transaction file to see updates
+
+# check a0302239 wallet for pending transactions
+curl localhost:5000/balance/a0302239-42a1-4047-94c2-723e4c8707ba
+
+# a0302239 wallet spends 75 points
+curl -X POST -G localhost:5000/spend/a0302239-42a1-4047-94c2-723e4c8707ba --data-urlencode 'amt=75'
+
+# check the pending_transactions to see that pending transactions have been removed/deducted
+
+# check balances again
+curl localhost:5000/balances
